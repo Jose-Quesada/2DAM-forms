@@ -23,4 +23,34 @@ export class BasicPageComponent {
     this.myForm.reset({ price:0, inStorage:0});
 
   }
+
+  isValidField( field: string):boolean | null{
+    return this.myForm.controls[field].errors && this.myForm.controls[field].touched;
+  }
+
+  getFieldError( field: string): string | null {
+    if (!this.myForm.controls[field] ) return null;
+    //si el formulario no tiene ese campo no regreso nada
+
+    const errors = this.myForm.controls[field].errors || {};
+    //si el campo contiene errores se almacenan, en otro caso objeto vacío
+
+    for (const key of Object.keys(errors)) {
+      //recorro los distintos "keys" del objeto errors
+      switch ( key ){
+        case 'required':
+          return 'Este campo es requerido';
+
+        case 'minlength':
+          //return `Mínimo 3 caracteres`;
+          //TODO acceder al número de caracteres requerido
+          return `Mínimo ${errors['minlength'].requiredLength } caracteres`;
+      }
+
+    }
+    return 'null';
+
+  }
+
+
 }
