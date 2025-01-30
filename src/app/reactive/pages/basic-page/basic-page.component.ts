@@ -43,7 +43,6 @@ export class BasicPageComponent {
 
         case 'minlength':
           //return `Mínimo 3 caracteres`;
-          //TODO acceder al número de caracteres requerido
           return `Mínimo ${errors['minlength'].requiredLength } caracteres`;
       }
 
